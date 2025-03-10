@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin App</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Admin App</h1>
+    <h2>Upload New Filter</h2>
+    <form method="post" action="/upload" enctype="multipart/form-data">
+        <input type="text" name="name" placeholder="Filter Name" required>
+        <input type="file" name="file" accept="image/*">
+        <button type="submit">Upload</button>
+    </form>
+
+    <h2>Filters</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for filter in filters %}
+        <tr>
+            <td>{{ filter.name }}</td>
+            <td><img src="/{{ filter.image_path }}" alt="{{ filter.name }}" width="100"></td>
+            <td>
+                <a href="/delete/{{ filter.doc_id }}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>
